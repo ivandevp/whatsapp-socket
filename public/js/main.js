@@ -1,125 +1,60 @@
-window.addEventListener("load", cargarPagina);
+var socket = io.connect("http://localhost:8086", { "forceNew": true});
 
 var mensajes = document.getElementById("mensajes");
 var chat = document.getElementById("chat");
-var conversacion = document.getElementById("conversacion");
-var otraConversacion = document.getElementsByClassName("otraConversacion");
-var foto = document.getElementById("image-profile");
-var user = document.getElementById("user-profile");
-var contact = document.getElementById("contact");
-var msn = document.getElementsByClassName("msn");
+var messages = document.getElementById("messages");
 
-function cargarPagina() {
+var cargarPagina = function() {
 		
 	mensajes.focus();
 	mensajes.addEventListener("keyup", enviarMensaje);
-	for (var i = 0, longitud = otraConversacion.length; i < longitud; i++) {
-		otraConversacion[i].addEventListener("click", cambioConversacion);
-	}
-}
+};
 
-function enviarMensaje(e) {
+window.addEventListener("load", cargarPagina);
+
+var enviarMensaje = function(e)  {
 
 	var texto = mensajes.value.trim();
 	if (e.keyCode == 13) {
 
 		if (existeMensaje(mensajes.value)) {
-			var burbuja = crearElemento("div", ["w-message", "w-message-out"]);
-			burbuja.id = "posicion";
-
-			var box = crearElemento("div", ["w-message-text"]);
-
-			var parrafo = document.createElement("p");
-			parrafo.textContent = texto;
-
-			conversacion.appendChild(burbuja);
-			burbuja.appendChild(box);
-			box.appendChild(parrafo);
-
-			var hora = crearElemento("div", ["time"]);
-			var mostrarHora = horaActual();
-			hora.textContent = mostrarHora;
-			box.appendChild(hora);
+			enviar(e);
 			
 			mensajes.value = "";
 			document.getElementById("posicion").scrollIntoView(true);
 		}
 	}
-}
+};
 
-function cambioConversacion() {
+socket.on("messages", function(data) {
+	console.log(data);
+	plantilla(data);
+});
 
-	var conversacion = this.childNodes[1];	
-	var imagenCambio = conversacion.childNodes[1].src;
-	foto.src = imagenCambio;
+var enviar = function(e) {
+	var payload = {
+		text: mensajes.value
+	};
+	socket.emit("new-message", payload);
+};
 
-	user.style.display = "none";
+var plantilla = function(data) {
+	var html = data.map(function(data, index) {
+		return(`<div id="posicion" class="w-message w-message-out">
+					<div class="w-message-text">
+	  					<p>${data.text}</p>
+	  				</div>
+				</div>`);
+	}).join(" ");
 
-	var nombreCambio = conversacion.children[1].textContent;
-	contact.textContent = nombreCambio;
+	messages.innerHTML = html;
+};
 
-	for (var i = 0, longitud = msn.length; i < longitud; i++) {
-		msn[i].style.display = "none";
-	}
-
-	if (this == otraConversacion[0]) {
-		for (var i = 0, longitud = msn.length; i < longitud; i++) {
-			msn[i].style.display = "block";
-		}
-		user.style.display = "block";
-	} else {
-		var elemento = this.firstElementChild;
-
-		var div = crearElemento("div", ["w-message", "w-message-in"]);
-		chat.appendChild(div);
-
-		var divMessage = crearElemento("div", ["w-message-text"]);
-		div.appendChild(divMessage);
-
-		var nombre = document.createElement("h5");
-		var contenido = elemento.children[1].textContent;
-		nombre.textContent = contenido;
-		divMessage.appendChild(nombre);
-
-		var textoMensaje = document.createElement("p");
-		var contenidoMensaje = elemento.children[2].textContent;
-		textoMensaje.textContent = contenidoMensaje;
-		divMessage.appendChild(textoMensaje);
-
-		var horaMensaje = crearElemento("div", ["time"]);
-		var contenidoHora = this.lastElementChild.textContent;
-		horaMensaje.textContent = contenidoHora;
-		divMessage.appendChild(horaMensaje);
-	}
-}
-
-function horaActual() {
-	var f = new Date();
-	var h = f.getHours();
-	var m = f.getMinutes();
-	if (m < 10) {
-		m = "0" + m;
-	}
-	var hora = h + ":" + m;
-	return hora;
-}
-
-function existeMensaje(mensaje) {
+var existeMensaje = function(mensaje) {
 	mensaje = mensaje.trim();
 	if (mensaje.length == 0) {
 		return false;
 	} else {
 		return true;
 	}
-}
-
-function crearElemento(etiqueta, clases = []) {
-	var elemento = document.createElement(etiqueta);
-	var l = clases.length;
-	if(l > 0) {
-		for(var i = 0; i < l; i++) {
-			elemento.classList.add(clases[i]);
-		}
-	}
-	return elemento;
-}
+};
