@@ -20,7 +20,7 @@ io.on("connection", function(socket) {
 	socket.on("new-message", function(data) {
 		socket.broadcast.emit("new-message", {
 			username: socket.username,
-			message: data
+			message: " " + data
 		});
 	});
 
@@ -39,6 +39,12 @@ io.on("connection", function(socket) {
 			numUsers: socket.username
 		});
 	});
+
+	socket.on("typing", function () {
+    	socket.broadcast.emit("typing", {
+      		username: socket.username
+    	});
+  	});
 
 	socket.on("stop-typing", function() {
 		socket.broadcast.emit("stop-typing", {

@@ -50,7 +50,7 @@ var cargarPagina = function() {
       		$inputMessage.val("");
       		addChatMessage({
         		username: username,
-        		message: message
+        		message: " " + message
       		});
       		socket.emit("new-message", message);
     	}
@@ -86,7 +86,7 @@ var cargarPagina = function() {
 
   	function addChatTyping (data) {
     	data.typing = true;
-    	data.message = "is typing";
+    	data.message = " is typing";
     	addChatMessage(data);
   	}
 
