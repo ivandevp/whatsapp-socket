@@ -1,49 +1,42 @@
-  function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    if (response.status === 'connected') {
-      testAPI();
-    } else if (response.status === 'not_authorized') {
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    } else {
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
-    }
-  }
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
+// cargamos el sdk de forma asincrónica
+(function(d){
+   var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement('script'); js.id = id; js.async = true;
+   js.src = "//connect.facebook.net/en_US/all.js";
+   ref.parentNode.insertBefore(js, ref);
+ }(document));
 
-  window.fbAsyncInit = function() {
+// Iniciamos el sdk y su configuración
+window.fbAsyncInit = function() {
   FB.init({
-    appId      : "714817465348572",
-    cookie     : true,
-    xfbml      : true,
-    version    : 'v2.5'
+    appId      : "714817465348572",// la appid de tu aplicación facebook
+    status   : true,
+cookie   : true,
+xfbml    : true,
+oauth    : true // habilita oauth 2.0
   });
 
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
+   //manejador para comprobar si el status del usuario ha cambiado o no 
+  FB.Event.subscribe('auth.statusChange', function(response) {
+    if (response.authResponse) {
+      //si el usuario es logueado correctamente hacemos lo que queramos
+      //en nuestro caso redirigimos
+      FB.api('/me', function(me){
+        if (me.name) {
+           //en vez de redirigir, como la petición es realizada
+           //sin refrescar, podemos hacer cualquier interacción
+           //sin movernos de la página
+           window.location = "index2.html";
+        }
+      })
+    } 
   });
 
-  };
+  //evento para iniciar sesión y pedir los permisos que pasemos en scope
+  document.getElementById('fb').addEventListener('click', function(){
+   FB.login(function(){}, {  });
+  });
+} 
 
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
 
-  function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api("http://localhost:8086/index2.html", function(response) {
-      console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
-    });
-  }

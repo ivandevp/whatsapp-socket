@@ -1,152 +1,65 @@
-// window.addEventListener("load", cargarPagina);
-// var socket = io();
 
-// var mensajes = document.getElementById("mensajes");
-// var chat = document.getElementById("chat");
-// var conversacion = document.getElementById("conversacion");
-// var otraConversacion = document.getElementsByClassName("otraConversacion");
-// var foto = document.getElementById("image-profile");
-// var user = document.getElementById("user-profile");
-// var contact = document.getElementById("contact");
-// var msn = document.getElementsByClassName("msn");
+  // cargamos el sdk de forma asincrónica
+      (function(d){
+         var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement('script'); js.id = id; js.async = true;
+         js.src = "//connect.facebook.net/en_US/all.js";
+         ref.parentNode.insertBefore(js, ref);
+       }(document));
+ 
+     // Iniciamos el sdk y su configuración
+      window.fbAsyncInit = function() {
+         FB.init({
+          appId      : "714817465348572", //la appid de tu aplicación facebook
+          status   : true,
+      cookie   : true,
+      xfbml    : true,
+      oauth    : true //enables OAuth 2.0
+        });
+ 
+        //manejador para comprobar si el status del usuario ha cambiado o no 
+        FB.Event.subscribe('auth.statusChange', function(response) {
+          if (response.authResponse) {
+            //si el usuario es logueado correctamente le saludamos
+            FB.api('/me', function(me){
+              if (me.name) {
+								var foto = "<div class='avatar'>{{fotoprincipal}}</div>";
 
-// function cargarPagina() {
-		
-// 	// mensajes.focus();
-// // 	mensajes.addEventListener("keyup", enviarMensaje);
-// // 	// for (var i = 0, longitud = otraConversacion.length; i < longitud; i++) {
-// // 	// 	otraConversacion[i].addEventListener("click", cambioConversacion);
-// // 	// }
-// // }
+              	var plantilla = '<li>' + 
+		  														'<div id="contac">' + 
+											  						'<div>' + 
+														        	'<div id="foto" class="avatar">{{foto}}</div>' +
+											  							'<span id="saludo">{{saludo}}</span>' +
+											  						'</div>' +
+														        '<a href="#" id="salir">Cerrar Sesion</a>' +
+													        '</div>' + 				
+																'</li>' ;
 
+								var agregrar ="";
 
-// function enviarMensaje(evt) {
-// 	// socket.io
+								agregrar += plantilla.replace("{{saludo}}", me.name)
+														.replace("{{foto}}", '<img src="https://graph.facebook.com/' + me.id + '/picture">')
+								var a ="";
+								a = foto.replace("{{fotoprincipal}}", '<img src="https://graph.facebook.com/' + me.id + '/picture">');
+                // document.getElementById('saludo').innerHTML = me.name;
+                // document.getElementById('foto').innerHTML = 
+                // '<img src="https://graph.facebook.com/' + me.id + '/picture">';
 
-// 	evt.preventDefault();
-
-// 	// var socket = io();
-
-// 	if (evt.keyCode === 13) {
-// 		$(document).ready(function() {
-// 			// $("#login").submit(function(evt) {
-// 				var data = {
-// 					// name: $(this).find("input").val(),
-// 					name:$("#mensajes").val(),
-// 					status: "Connecting..."
-// 				};
-// 				socket.emit("conectando", data);
-// 			// });
-
-// 		});
-
-// 		socket.on("conectado", function (usuario) {
-// 			$("#conversacion").append("<div>" + usuario.name + "</div>");
-// 		});
-// 	}
-
-// 	// var texto = mensajes.value.trim();
-// 	// if (e.keyCode == 13) {
-
-// 	// 	if (existeMensaje(mensajes.value)) {
-// 	// 		var burbuja = crearElemento("div", ["w-message", "w-message-out"]);
-// 	// 		burbuja.id = "posicion";
-
-// 	// 		var box = crearElemento("div", ["w-message-text"]);
-
-// 	// 		var parrafo = document.createElement("p");
-// 	// 		parrafo.textContent = texto;
-
-// 	// 		conversacion.appendChild(burbuja);
-// 	// 		burbuja.appendChild(box);
-// 	// 		box.appendChild(parrafo);
-
-// 	// 		var hora = crearElemento("div", ["time"]);
-// 	// 		var mostrarHora = horaActual();
-// 	// 		hora.textContent = mostrarHora;
-// 	// 		box.appendChild(hora);
-			
-// 	// 		mensajes.value = "";
-// 	// 		document.getElementById("posicion").scrollIntoView(true);
-// 	// 	}
-// 	// }
-// }
-
-// // function cambioConversacion() {
-
-// // 	var conversacion = this.childNodes[1];	
-// // 	var imagenCambio = conversacion.childNodes[1].src;
-// // 	foto.src = imagenCambio;
-
-// // 	user.style.display = "none";
-
-// // 	var nombreCambio = conversacion.children[1].textContent;
-// // 	contact.textContent = nombreCambio;
-
-// // 	for (var i = 0, longitud = msn.length; i < longitud; i++) {
-// // 		msn[i].style.display = "none";
-// // 	}
-
-// // 	if (this == otraConversacion[0]) {
-// // 		for (var i = 0, longitud = msn.length; i < longitud; i++) {
-// // 			msn[i].style.display = "block";
-// // 		}
-// // 		user.style.display = "block";
-// // 	} else {
-// // 		var elemento = this.firstElementChild;
-
-// // 		var div = crearElemento("div", ["w-message", "w-message-in"]);
-// // 		chat.appendChild(div);
-
-// // 		var divMessage = crearElemento("div", ["w-message-text"]);
-// // 		div.appendChild(divMessage);
-
-// // 		var nombre = document.createElement("h5");
-// // 		var contenido = elemento.children[1].textContent;
-// // 		nombre.textContent = contenido;
-// // 		divMessage.appendChild(nombre);
-
-// // 		var textoMensaje = document.createElement("p");
-// // 		var contenidoMensaje = elemento.children[2].textContent;
-// // 		textoMensaje.textContent = contenidoMensaje;
-// // 		divMessage.appendChild(textoMensaje);
-
-// // 		var horaMensaje = crearElemento("div", ["time"]);
-// // 		var contenidoHora = this.lastElementChild.textContent;
-// // 		horaMensaje.textContent = contenidoHora;
-// // 		divMessage.appendChild(horaMensaje);
-// // 	}
-// // }
-
-// function horaActual() {
-// 	var f = new Date();
-// 	var h = f.getHours();
-// 	var m = f.getMinutes();
-// 	if (m < 10) {
-// 		m = "0" + m;
-// 	}
-// 	var hora = h + ":" + m;
-// 	return hora;
-// }
-
-// function existeMensaje(mensaje) {
-// 	mensaje = mensaje.trim();
-// 	if (mensaje.length == 0) {
-// 		return false;
-// 	} else {
-// 		return true;
-// 	}
-// }
-
-// function crearElemento(etiqueta, clases = []) {
-// 	var elemento = document.createElement(etiqueta);
-// 	var l = clases.length;
-// 	if(l > 0) {
-// 		for(var i = 0; i < l; i++) {
-// 			elemento.classList.add(clases[i]);
-// 		}
-// 	}
-// 	return elemento;
-// }
-
+                $("#fotoPrincipal").append(a);
+                $("#listaContactos").append(agregrar);
+                $("#borrar").css("display", "none");
+              }
+            })
+          } else {
+            //si el usuario no tiene permiso porque ha cerrado sesión o simplemente
+            //no tiene permisos de la aplicación redirigimos al login
+            window.location = "index.html";
+          }
+        });
+    //al pulsar en salir cerramos sesión y mandamos al inicio
+        document.getElementById('salir').addEventListener('click', function(){
+          FB.logout();
+        }); 
+      } 
 

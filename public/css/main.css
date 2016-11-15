@@ -365,3 +365,39 @@ aside.w-contacts header {
 .w-recent-chats::-webkit-scrollbar-thumb {
   background-color: rgba(0,0,0,.2);
 }
+
+
+
+
+
+/*css de foto y nombre*/
+
+
+#foto{
+	display: inline-block;
+	/*border-radius: 100% !important;*/
+}
+
+#foto + #saludo{
+	display: inline-block;
+	position: absolute;
+	margin-top: 0.4em;
+	font-size: 130%;
+	font-family: cursive;
+
+}
+#contac {
+	background-color: #F1F1F1;
+	margin: 0.3em 1em 1em 1em;
+	padding: 5%;
+}
+#salir{
+	float: right;
+	margin-bottom: 1em !important;
+	color: #A9A9A9;
+	text-decoration: none;
+}
+
+#salir:hover{
+	color: #321F66;
+}
