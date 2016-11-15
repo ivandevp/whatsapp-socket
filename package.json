@@ -1,27 +1,27 @@
 {
-  "name": "whatsapp-socket",
-  "version": "1.0.0",
-  "description": "Chat",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/paolaozv/whatsapp-socket.git"
-  },
-  "author": "Anabel, Paola",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/paolaozv/whatsapp-socket/issues"
-  },
-  "homepage": "https://github.com/paolaozv/whatsapp-socket#readme",
-  "dependencies": {
-    "express": "^4.14.0",
-    "socket.io": "^1.5.1"
-  },
-  "devDependencies": {
-    "nodemon": "^1.11.0"
-  }
+      "name": "whatsapp-socket",
+      "version": "1.0.0",
+      "description": "Chat",
+      "main": "server.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon server.js"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/paolaozv/whatsapp-socket.git"
+      },
+      "author": "Anabel, Paola",
+      "license": "MIT",
+      "bugs": {
+        "url": "https://github.com/paolaozv/whatsapp-socket/issues"
+      },
+      "homepage": "https://github.com/paolaozv/whatsapp-socket#readme",
+      "dependencies": {
+        "express": "^4.14.0",
+        "socket.io": "^1.5.1"
+      },
+      "devDependencies": {
+        "nodemon": "^1.11.0"
+      }
 }
