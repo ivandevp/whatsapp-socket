@@ -10,16 +10,16 @@
 	  	<link href="css/bootstrap.min.css" rel="stylesheet">
 	  	<link href="css/icomoon.css" rel="stylesheet">
 	  	<link href="css/font-awesome.min.css" rel="stylesheet">
-	  	<link href="css/main.css" rel="stylesheet">
 	  	<link href="css/queries.css" rel="stylesheet">
+	  	<link href="css/main.css" rel="stylesheet">
 	</head>
 	<body>
 	  	<div class="w-app">
 	  		<div class="container">
 	  			<aside class="col-md-4 w-contacts">
 	  				<header class="w-profile clearfix">
-	  					<div class="avatar col-xs-7">
-	  						<img src="image/gian.jpg" alt="">
+	  					<div class="avatar col-xs-7" id="fotoPrincipal">
+	  						<a href="" id="salir">Cerrar Sesion</a>
 	  					</div>
 
 	  					<div class="w-chat-controls col-xs-4">
@@ -30,6 +30,17 @@
 	  				<div class="w-search icon-search">
 	  					<input type="text" placeholder="Buscar o empezar un chat nuevo" class="w-search-contacts">
 	  				</div>
+	  				<ul>
+						<li id="borrar">
+		  					<div style="background-color: white">
+		  						<div>
+					        		<div id="foto"></div>
+		  							<span id="saludo"></span>
+		  						</div>
+					        	(<a href="#" id="salir">Cerrar Sesion</a>)
+				        	</div>				
+						</li>
+	  				</ul>
 	  			</aside>
 	  			<section class="col-md-8 w-contacts w-messages">
 	  				<header class="w-chat-messages clearfix">
@@ -45,8 +56,6 @@
 	  				</header>
 	  				<section class="w-chat-panel">
 	  					<div class="w-message-list clearfix" id="chat">
-	  						<!-- <div id="messages"></div> -->
-	  						<!-- socket -->
 	  						<ul class="pages">
 							    <li class="chat page">
 							      	<div class="chatArea">
@@ -77,8 +86,10 @@
 	  			</section>
 	  		</div>
 	  	</div>
-	  	<script src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-	  	<script src="/socket.io/socket.io.js"></script>
+		<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+	  	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	  	<script type="text/javascript" src="js/facebook.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript" src="js/app.js"></script>
 	</body>
 </html>

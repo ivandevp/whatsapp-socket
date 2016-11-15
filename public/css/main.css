@@ -366,3 +366,66 @@ aside.w-contacts header {
 .w-recent-chats::-webkit-scrollbar-thumb {
   background-color: rgba(0,0,0,.2);
 }
+
+
+
+
+
+/*css de foto y nombre*/
+
+
+#foto{
+	display: inline-block;
+	/*border-radius: 100% !important;*/
+}
+
+#foto + #saludo{
+	display: inline-block;
+	position: absolute;
+	margin-top: 0.4em;
+	font-size: 130%;
+	font-family: cursive;
+
+}
+#contac {
+	background-color: #F1F1F1;
+	margin: 0.3em 1em 1em 1em;
+	padding: 5%;
+}
+#salir{
+	margin-bottom: 1em !important;
+	color: #A9A9A9;
+	text-decoration: none;
+	font-size: 110%;
+	margin-top: 0.7em;
+	display: inline-block;
+}
+
+#salir:hover{
+	color: #321F66;
+}
+#body{
+	background-image: url(../image/fondo1.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	position: relative;
+	height: 100vh;
+	/*background-repeat: no-repeat;*/
+}
+.facebook{
+	color: white;
+	display: inline-block;
+	padding: 2em 6em;
+}
+.cont {
+	position: absolute;
+	top: 0;
+	margin: auto;
+	/* padding: 3em; */
+	background-color: rgba(146, 98, 164, 0.5);
+	width: 100%;
+	height: 100vh;
+	/*padding-left: 47%;*/
+	/*padding-top: 20%;*/
+}
