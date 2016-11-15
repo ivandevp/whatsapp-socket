@@ -2,13 +2,17 @@ var express = require("express");
 var app = express();
 var server = require("http").createServer(app);
 var io = require("socket.io")(server);
-var port = process.env.PORT || 8086;
 
-server.listen(port, function() {
-	console.log("Servidor corriendo en", port);
-});
+// Heroku
+app.set("port", (process.env.PORT || 8086));
 
 app.use(express.static(__dirname + "/public"));
+
+server.listen(app.get("port"), function() {
+  console.log("Servidor corriendo en", app.get("port"));
+});
+
+//Hasta aquí Heroku
 
 // Chat
 
