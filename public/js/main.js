@@ -32,7 +32,7 @@
 														        	'<div id="foto" class="avatar">{{foto}}</div>' +
 											  							'<span id="saludo">{{saludo}}</span>' +
 											  						'</div>' +
-														        '<a href="#" id="salir">Cerrar Sesion</a>' +
+														        // '<a href="" id="salir">Cerrar Sesion</a>' +
 													        '</div>' + 				
 																'</li>' ;
 
@@ -46,7 +46,7 @@
                 // document.getElementById('foto').innerHTML = 
                 // '<img src="https://graph.facebook.com/' + me.id + '/picture">';
 
-                $("#fotoPrincipal").append(a);
+                $("#fotoPrincipal").prepend(a);
                 $("#listaContactos").append(agregrar);
                 $("#borrar").css("display", "none");
               }
@@ -58,7 +58,8 @@
           }
         });
     //al pulsar en salir cerramos sesión y mandamos al inicio
-        document.getElementById('salir').addEventListener('click', function(){
+        document.getElementById('salir').addEventListener('click', function(e){
+        	e.preventDefault();
           FB.logout();
         }); 
       } 
