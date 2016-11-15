@@ -5,7 +5,7 @@
 	  	<title>Whatsapp Web</title>
 	  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	  	<meta name="viewport" content="width=device-width, initial-scale=1">
-	  	<link rel="shortcut icon" href="image/favicon.png" type="image/png">
+	  	<link rel="shortcut icon" href="image/icon.ico" type="image/png">
 	  	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600%7CRoboto:300,400,500" media="all">
 	  	<link href="css/bootstrap.min.css" rel="stylesheet">
 	  	<link href="css/icomoon.css" rel="stylesheet">
@@ -47,6 +47,7 @@
 	  					<div class="avatar col-xs-9 w-chat-profile">
 	  						<img src="image/logocodeacademy.png" alt="" id="image-profile">
 	  						<h4 class="w-contact-name" id="contact">Laboratoria Perú</h4>
+	  						<div id="type"></div>
 	  					</div>
 	  					<div class="w-chat-controls col-xs-2">
 	  						<div class="icon-attachment"></div>
@@ -56,19 +57,7 @@
 	  				</header>
 	  				<section class="w-chat-panel">
 	  					<div class="w-message-list clearfix" id="chat">
-	  						<ul class="pages">
-							    <li class="chat page">
-							      	<div class="chatArea">
-							        	<ul class="messages"></ul>
-							      	</div>
-							    </li>
-							    <li class="login page">
-							      	<div class="form">
-							        	<h3 class="title">What's your nickname?</h3>
-							        	<input class="usernameInput" type="text" maxlength="14" />
-							      	</div>
-							    </li>
-								</ul>
+	  						<div id="messages"></div>
 	  					</div>
 	  				</section>
 
