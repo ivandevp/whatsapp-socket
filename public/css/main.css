@@ -379,7 +379,7 @@ aside.w-contacts header {
 	/*border-radius: 100% !important;*/
 }
 
-#foto + #saludo{
+.foto + .saludo{
 	display: inline-block;
 	position: absolute;
 	margin-top: 0.4em;
@@ -387,10 +387,11 @@ aside.w-contacts header {
 	font-family: cursive;
 
 }
-#contac {
+.contac {
 	background-color: #F1F1F1;
 	margin: 0.3em 1em 1em 1em;
 	padding: 5%;
+	padding-bottom: 13%;
 }
 #salir{
 	margin-bottom: 1em !important;
@@ -411,12 +412,16 @@ aside.w-contacts header {
 	background-position: center;
 	position: relative;
 	height: 100vh;
-	/*background-repeat: no-repeat;*/
 }
 .facebook{
-	color: white;
-	display: inline-block;
-	padding: 2em 6em;
+	  color: white;
+    display: inline-block;
+    padding: 0.4em 3em;
+    background-color: #791294;
+    font-size: 20px;
+    position: absolute;
+    top: 45%;
+    left: 40%;
 }
 .cont {
 	position: absolute;
