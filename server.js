@@ -15,7 +15,7 @@ server.listen(app.get("port"), function() {
 var messages = [{
 	id: 1,
 	text: "Hola Bienvenido a blaH",
-	author: "";
+	author: ""
 }];
 
 io.on("connection", function(socket) {
